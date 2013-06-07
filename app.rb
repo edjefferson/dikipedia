@@ -17,8 +17,9 @@ end
 
 
 get '/topic/:text' do
-	if (Topic.count(:conditions => "topic = #{params[:text]}") == 0)
+	url = params[:text].to_s
+	if (Topic.count(:conditions => "topic = #{url}") == 0)
 
-  Topic.create(:topic=> params[:text], :viewed_at => Time.now)
+  Topic.create(:topic=> url, :viewed_at => Time.now)
 end
 end
