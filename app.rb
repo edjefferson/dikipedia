@@ -5,16 +5,19 @@ require "mysql2"
 
 ActiveRecord::Base.establish_connection(
   :adapter  => "mysql2",
-  :host     => "us-cdbr-east-03.cleardb.com",
-  :username => "b205cafa461f0e",
-  :password => "e492bbc6",
-  :database => "heroku_366703dfec33808"
+  :host     => ENV['DBADDRESS'],
+  :username => ENV['DBUSER'],
+  :password => ENV['DBPASS'],
+  :database => ENV['DBNAME']
 )
 
 class Topic < ActiveRecord::Base
 end
 
 
+
 get '/topic/:text' do
-  Topic.create(:topic=> params[:text])
+
+	
+  Topic.create(:topic=> params[:text], :viewed_at => Time.now)
 end
