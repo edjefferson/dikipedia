@@ -3,6 +3,7 @@ require "sinatra"
 require "active_record"
 require "mysql2"
 require "twitter"
+require "uri"
 
 class String
   def trim119
