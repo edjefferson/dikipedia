@@ -4,6 +4,7 @@ require "active_record"
 require "mysql2"
 require "twitter"
 require "uri"
+require "cgi"
 
 class String
   def trim119
@@ -48,6 +49,6 @@ get '/topic/:text' do
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
 
   Topic.create(:topic=> url[-1], :viewed_at => Time.now)
-  Tweets.update("#{URI.decode(url[-1]).to_s.gsub("_"," ").trim119} #{decodedurl}")
+  Tweets.update("#{CGI::unescape(url[-1]).gsub("_"," ").trim119} #{decodedurl}")
 end
 end
