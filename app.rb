@@ -48,6 +48,6 @@ get '/topic/:text' do
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
 
   Topic.create(:topic=> url[-1], :viewed_at => Time.now)
-  Tweets.update("#{url[-1].trim119} #{decodedurl}")
+  Tweets.update("#{url[-1]..gsub("_"," ").trim119} #{decodedurl}")
 end
 end
