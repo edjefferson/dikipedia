@@ -3,16 +3,12 @@ require "sinatra"
 require "active_record"
 require "mysql2"
 
-#DB_CONFIG = YAML::load(File.open('config/database.yml'))
-
-#set :database, "mysql:///#{DB_CONFIG['username']}:#{DB_CONFIG['password']}@#{DB_CONFIG['host']}:#{DB_CONFIG['port']}/#{DB_CONFIG['database']}"
-
 ActiveRecord::Base.establish_connection(
   :adapter  => "mysql2",
-  :host     => ENV['DBADDRESS'],
-  :username => ENV['DBUSER'],
-  :password => ENV['DBPASS'],
-  :database => ENV['DBNAME']
+  :host     => "us-cdbr-east-03.cleardb.com",
+  :username => "b205cafa461f0e",
+  :password => "e492bbc6",
+  :database => "heroku_366703dfec33808"
 )
 
 class Topic < ActiveRecord::Base
