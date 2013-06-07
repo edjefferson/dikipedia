@@ -1,0 +1,7 @@
+# config/database.yml
+adapter:mysql2
+database: dikipedia
+username: test1
+password: test1
+host: localhost
+port: 3306
