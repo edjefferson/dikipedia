@@ -42,7 +42,7 @@ get '/topic/:text' do
 	url = params[:text].to_s.split("/")
 
 	
-  decodedurl = URI.unescape(CGI::escape(Base64.decode64(url)))
+  decodedurl = URI.decode(url)
 	
 	puts url[-1]
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
