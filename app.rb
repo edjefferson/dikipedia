@@ -39,10 +39,10 @@ end
 
 
 get '/topic/:text' do
-	url = params[:text].to_s.split("/")
+	url = URI.decode(params[:text]).split("/")
 
 	
-  decodedurl = URI.decode(params[:text])
+  
 	
 	puts url[-1]
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
