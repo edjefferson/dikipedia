@@ -23,14 +23,14 @@ ActiveRecord::Base.establish_connection(
   :password => ENV['DBPASS'],
   :database => ENV['DBNAME']
 )
-=begin
+
 Twitter = Twitter.configure do |config|
     config.consumer_key = ENV['YOUR_CONSUMER_KEY']
     config.consumer_secret = ENV['YOUR_CONSUMER_SECRET']
     config.oauth_token = ENV['YOUR_OAUTH_TOKEN']
     config.oauth_token_secret = ENV['YOUR_OAUTH_TOKEN_SECRET']
  end
-=end
+
 
 class Topic < ActiveRecord::Base
 end
@@ -39,10 +39,14 @@ end
 
 get '/topic/:text' do
 	url = params[:text].to_s.split("/")
+
+	
+  decodedurl = URI.unescape(CGI::escape(Base64.decode64(url)))
+	
 	puts url[-1]
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
 
   Topic.create(:topic=> url[-1], :viewed_at => Time.now)
-  #Twitter.update(url)
+  Twitter.update("#{url[-1].trim119} #{decodedurl}")
 end
 end
