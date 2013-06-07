@@ -3,5 +3,6 @@ source :rubygems
 
 gem "sinatra"
 gem "mysql2"
-gem "activerecord"
+gem "active_record"
 gem "sinatra-activerecord"
+gem "twitter"
