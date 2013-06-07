@@ -39,15 +39,15 @@ end
 
 
 get '/topic/:text' do
-	url = URI.decode(params[:text]).split("/")
+	url = params[:text].to_s.split("/")
 
 	
-  
+  decodedurl = URI.decode(params[:text])
 	
 	puts url[-1]
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
 
   Topic.create(:topic=> url[-1], :viewed_at => Time.now)
-  Tweets.update("#{url[-1].gsub("_"," ").trim119} #{decodedurl}")
+  Tweets.update("#{URI.decode(url[-1]).to_s.gsub("_"," ").trim119} #{decodedurl}")
 end
 end
