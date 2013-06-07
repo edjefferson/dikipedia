@@ -25,7 +25,7 @@ ActiveRecord::Base.establish_connection(
   :database => ENV['DBNAME']
 )
 
-Twitter = Twitter.configure do |config|
+Tweets = Twitter.configure do |config|
     config.consumer_key = ENV['YOUR_CONSUMER_KEY']
     config.consumer_secret = ENV['YOUR_CONSUMER_SECRET']
     config.oauth_token = ENV['YOUR_OAUTH_TOKEN']
@@ -48,6 +48,6 @@ get '/topic/:text' do
 	if (Topic.count(:conditions => "topic = '#{url[-1]}' AND date(viewed_at) = date('#{Time.now}')") == 0)
 
   Topic.create(:topic=> url[-1], :viewed_at => Time.now)
-  Twitter.update("#{url[-1].trim119} #{decodedurl}")
+  Tweets.update("#{url[-1].trim119} #{decodedurl}")
 end
 end
