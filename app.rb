@@ -5,15 +5,16 @@ require "mysql2"
 require "twitter"
 
 class String
-  def trim140
+  def trim119
     tweet = self
-    while tweet.length>140
+    while tweet.length>119
       tweetwords=tweet.split(' ')
       tweet=tweetwords[0..-2].join(' ') << "..."
  
     end
     return tweet
   end
+end
 
 ActiveRecord::Base.establish_connection(
   :adapter  => "mysql2",
