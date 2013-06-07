@@ -11,13 +11,14 @@ ActiveRecord::Base.establish_connection(
   :password => ENV['DBPASS'],
   :database => ENV['DBNAME']
 )
-
+=begin
 Twitter = Twitter.configure do |config|
     config.consumer_key = ENV['YOUR_CONSUMER_KEY']
     config.consumer_secret = ENV['YOUR_CONSUMER_SECRET']
     config.oauth_token = ENV['YOUR_OAUTH_TOKEN']
     config.oauth_token_secret = ENV['YOUR_OAUTH_TOKEN_SECRET']
-  end
+ end
+=end
 
 class Topic < ActiveRecord::Base
 end
@@ -30,6 +31,6 @@ get '/topic/:text' do
 	if (Topic.count(:conditions => "topic = '#{url}' AND date(viewed_at) = date('#{Time.now}')") == 0)
 
   Topic.create(:topic=> url, :viewed_at => Time.now)
-  Twitter.update(url)
+  #Twitter.update(url)
 end
 end
